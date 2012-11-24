@@ -1,6 +1,8 @@
 import sublime
 import sublime_plugin
-
+import os
+import shutil
+import plistlib
 
 def get_settings():
     settings = sublime.load_settings(__name__ + '.sublime-settings')
@@ -21,7 +23,7 @@ def get_setting(key, default=None, view=None):
 
 class MakeTiCommand(sublime_plugin.WindowCommand):
     mode_list = ["clean", "run", "deploy"]
-    deploy_list = ["device", "local", "testflight", "hockey"]
+    deploy_list = ["device", "local", "testflight", "hockey", 'store']
     platform_list = ["ios", "ipad", "iphone", "android", "web"]
 
     mode = ''
@@ -33,24 +35,149 @@ class MakeTiCommand(sublime_plugin.WindowCommand):
         print args, kwargs
         self.window.show_quick_panel(self.mode_list, self._mode_list_callback)
 
+    def plistStringFromProvFile(self, path):
+        beginToken = '<?xml'
+        endToken = '</plist>'
+        f = open(path)
+        data = f.read()
+        begin = data.index(beginToken)
+        end = data.rindex(endToken) + len(endToken) 
+        return data[begin:end]
+
+    def getUUIDAndName(self, certPath):
+        
+        plistString = self.plistStringFromProvFile(certPath)
+        plist = plistlib.readPlistFromString(plistString)
+        print plist
+        return [plist['UUID'],plist['TeamName']]
+
+    def copyProvisioningProfile(self, certPath, certName):
+        dest = os.path.join(os.path.expanduser('~/Library/MobileDevice/Provisioning Profiles'), certName + '.mobileprovision')
+        print "copying " + certPath + " to " +  dest
+        shutil.copyfile(certPath, dest)
+
+    def cleanTarget(self):
+        root = self.window.folders()[0]
+        buildPath = os.path.join(root, "build")
+        iphonePath = os.path.join(buildPath, "iphone")
+        androidPath = os.path.join(buildPath, "android")
+        shutil.rmtree(iphonePath, True);
+        os.makedirs(iphonePath)
+        print "cleaned ", iphonePath
+        shutil.rmtree(androidPath, True);
+        os.makedirs(androidPath)
+        print "cleaned ", androidPath
+
+    def getCLIParamsForAndroid(self):
+        root = self.window.folders()[0]
+        env = {}
+        env['ANDROID_SDK'] = get_setting('androidsdk', '$ANDROID_SDK')
+        parameters = ['--platform', 'android', '--android-sdk', env['ANDROID_SDK']]
+        if (self.deploy != 'device'):
+            parameters.append('--build-only')
+        return [parameters, env]
+
+    def getCLIParamsForIOs(self):
+        root = self.window.folders()[0]
+        env = {}
+        parameters = ['--platform', 'iphone']
+
+        if (self.platform == 'ios'):
+            self.platform = 'universal'
+        parameters.extend(['--device-family', self.platform])
+        parameters.extend(['--deploy-type', 'development'])
+
+
+        if (self.deploy == 'run'):
+            parameters.extend(['--deploy-type', 'test'])
+            parameters.extend(['--target', 'simulator'])
+        else:
+            parameters.extend(['--deploy-type', 'test'])
+            certsPath = os.path.join(root, "certs")
+            if (self.deploy == 'device'):
+                certPath = os.path.join(certsPath, "development.mobileprovision")
+            elif (self.deploy == 'store'):
+                certPath = os.path.join(certsPath, "appstore.mobileprovision")
+            else:
+                certPath = os.path.join(certsPath, "distribution.mobileprovision")
+            uuidname = self.getUUIDAndName(certPath)
+            print uuidname
+            self.copyProvisioningProfile(certPath, uuidname[0])
+
+            parameters.extend(['--pp-uuid', uuidname[0]])
+            if (self.deploy == 'device'):
+                parameters.extend(['--target', 'device'])
+                parameters.extend(['--developer-name', uuidname[1]])
+            else:
+                parameters.extend(['--distribution-name', uuidname[1]])
+                if (self.deploy == 'store'):
+                    parameters.extend(['--target', 'dist-appstore'])
+                elif (self.deploy == 'local'):
+                    parameters.extend(['--target', 'dist-adhoc'])
+        
+        return [parameters, env]
+
+    def launchTiCLI(self):
+        root = self.window.folders()[0]
+        parameters = ["/usr/local/bin/node", "/usr/local/bin/titanium", "build", '--no-colors', '--force', '--project-dir', root, '--log-level', 'trace']
+        if (self.deploy == 'local'):
+            parameters.extend(['--output-dir', root])
+
+        platRes = [[],{}]
+        if (self.platform == 'ipad' or self.platform == 'iphone' or self.platform == 'ios'):
+            platRes = self.getCLIParamsForIOs()
+        elif (self.platform == 'android'):
+            platRes = self.getCLIParamsForAndroid()
+        parameters.extend(platRes[0])
+        print parameters
+        self.window.run_command("exec", {"cmd": parameters, "env": platRes[1]})
+
     def launchMake(self):
         sublime.log_commands(True)
         sublime.log_input(True)
         sublime.active_window().run_command("show_panel", {"panel": "console", "toggle": True})
+        if (self.mode == 'clean'):
+            self.cleanTarget()
+        else:
+            self.launchTiCLI()
+            # self.runShellCommand()
+
+    def runShellCommand(self):
         root = self.window.folders()[0]
-        parameters = ["make", "-C", root, self.mode, "platform=" + self.platform, "android_sdk_path=" + get_setting('androidsdk'), 'apkonly=true']
+        buildPath = os.path.join(root, "build")
+        plateform = 'android'
+        if (self.platform == 'ipad' or self.platform == 'iphone' or self.platform == 'ios'):
+            plateform = 'iphone'
+        plateformBuildPath = os.path.join(buildPath, plateform)
+        if not os.path.exists(plateformBuildPath):
+            os.makedirs(plateformBuildPath)
+
+        parameters = [os.path.join(root, "maketi", "titanium.sh")]
+        parameters.append("DEVICE_TYPE=" + self.platform)
+        parameters.append("PROJECT_ROOT=\"" + root + "\"")
+        if(self.mode == 'deploy'):
+            parameters.append("BUILD_TYPE='device'")
+
+        if (plateform == 'android'):
+            parameters.append("android_sdk_path=" + get_setting('androidsdk'))
+            if (self.deploy == 'local'):
+                parameters.append('APK_ONLY=true')
+
+        elif (plateform == 'iphone'):
+            if (self.deploy == 'device'):
+                parameters.append("cert_dev=" + str(get_setting('cert_dev_identity', 0)))
+            else:
+                parameters.append("cert_dist=" + str(get_setting('cert_dist_identity', 10)))
+            if (get_setting('ios_sdk') != None):
+                parameters.append("IOS_SDK=" + str(get_setting('ios_sdk')))
+
         if (self.deploy != '' and self.deploy != 'device'):
             if (self.deploy == 'local'):
-                parameters.append("dir=" + str(get_setting('local_deploy_dir', root)))
+                parameters.append("dir=\"" + str(get_setting('local_deploy_dir', root)) + "\"")
             else:
                 parameters.append(self.deploy + "=true")
         if (self.notes != ''):
             parameters.append("notes=\"" + self.notes + "\"")
-        if (self.platform == 'ipad' or self.platform == 'iphone' or self.platform == 'ios'):
-            parameters.append("cert_dist=" + str(get_setting('cert_dist_identity', 10)))
-            # if (self.deploy == 'device'):
-            #     parameters.append("cert_dev=" + str(s.get('cert_dev_identity', 0)))
-            # else:
         self.window.run_command("exec", {"cmd": parameters})
 
     def _mode_list_callback(self, index):
@@ -74,7 +201,7 @@ class MakeTiCommand(sublime_plugin.WindowCommand):
         # root = self.window.folders()[0]
         if (index > -1):
             self.platform = self.platform_list[index]
-            if (self.mode == 'deploy' and self.deploy != 'device' and self.deploy != 'local'):
+            if (self.mode == 'deploy' and self.deploy != 'device' and self.deploy != 'local' and self.deploy != 'store'):
                 self.window.show_input_panel("Release Notes", "", self._release_note_on_done, 0, 0)
             else:
                 self.launchMake()
