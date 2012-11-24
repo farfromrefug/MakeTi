@@ -3,6 +3,7 @@ import sublime_plugin
 import os
 import shutil
 import plistlib
+import re
 
 def get_settings():
     settings = sublime.load_settings(__name__ + '.sublime-settings')
@@ -40,6 +41,7 @@ class MakeTiCommand(sublime_plugin.WindowCommand):
         endToken = '</plist>'
         f = open(path)
         data = f.read()
+        f.close()
         begin = data.index(beginToken)
         end = data.rindex(endToken) + len(endToken) 
         return data[begin:end]
@@ -48,13 +50,14 @@ class MakeTiCommand(sublime_plugin.WindowCommand):
         
         plistString = self.plistStringFromProvFile(certPath)
         plist = plistlib.readPlistFromString(plistString)
-        print plist
+        # print plistimport re
         return [plist['UUID'],plist['TeamName']]
 
     def copyProvisioningProfile(self, certPath, certName):
         dest = os.path.join(os.path.expanduser('~/Library/MobileDevice/Provisioning Profiles'), certName + '.mobileprovision')
-        print "copying " + certPath + " to " +  dest
-        shutil.copyfile(certPath, dest)
+        if (not os.path.isfile(dest)):
+            print "copying " + certPath + " to " +  dest
+            shutil.copyfile(certPath, dest)
 
     def cleanTarget(self):
         root = self.window.folders()[0]
@@ -67,6 +70,46 @@ class MakeTiCommand(sublime_plugin.WindowCommand):
         shutil.rmtree(androidPath, True);
         os.makedirs(androidPath)
         print "cleaned ", androidPath
+
+    def updateIOsBuildInTiApp(self):
+        #update build number
+        root = self.window.folders()[0]
+        tiappPath = os.path.join(root, "tiapp.xml")
+        if (os.path.isfile(tiappPath)):
+            f2 = open(tiappPath, "r")
+            tiapp = f2.read()
+            f2.close()
+            print tiapp
+            m = re.search('(?<=<key>CFBundleVersion<\/key>)(\s*<string>)([\d]*)(?=<\/string>)',tiapp)
+            if (m != None):
+                version = int(m.group(2)) + 1
+                print 'updating tiapp CFBundleVersion to ' + version
+                tiapp = re.sub('<key>CFBundleVersion</key>\s*<string>[\d]*</string>', '<key>CFBundleVersion</key><string>' + str(version) + '</string>',tiapp)
+                f2 = open(tiappPath, "w")
+                f2.write(tiapp)
+                f2.close()
+        else:
+            print "tiapp.xml doesnt exist: " + tiappPath
+
+    def updateAndroidBuildInTiApp(self):
+        #update build number
+        root = self.window.folders()[0]
+        tiappPath = os.path.join(root, "tiapp.xml")
+        if (os.path.isfile(tiappPath)):
+            f2 = open(tiappPath, "r")
+            tiapp = f2.read()
+            f2.close()
+            print tiapp
+            m = re.search('(?<=android:versionCode=")([\d]*)(?=")',tiapp)
+            if (m != None):
+                version = int(m.group(1)) + 1
+                print 'updating tiapp android:versionCode to ' + version
+                tiapp = re.sub('(?<=android:versionCode=")[\d]*(?=")', str(version),tiapp)
+                f2 = open(tiappPath, "w")
+                f2.write(tiapp)
+                f2.close()
+        else:
+            print "tiapp.xml doesnt exist: " + tiappPath
 
     def getCLIParamsForAndroid(self):
         root = self.window.folders()[0]
@@ -126,8 +169,12 @@ class MakeTiCommand(sublime_plugin.WindowCommand):
         platRes = [[],{}]
         if (self.platform == 'ipad' or self.platform == 'iphone' or self.platform == 'ios'):
             platRes = self.getCLIParamsForIOs()
+            if (self.deploy == 'local'):
+                self.updateIOsBuildInTiApp();
         elif (self.platform == 'android'):
             platRes = self.getCLIParamsForAndroid()
+            if (self.deploy == 'local'):
+                self.updateAndroidBuildInTiApp();
         parameters.extend(platRes[0])
         print parameters
         self.window.run_command("exec", {"cmd": parameters, "env": platRes[1]})
