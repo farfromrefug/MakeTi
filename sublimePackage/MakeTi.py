@@ -83,7 +83,7 @@ class MakeTiCommand(sublime_plugin.WindowCommand):
             m = re.search('(?<=<key>CFBundleVersion<\/key>)(\s*<string>)([\d]*)(?=<\/string>)',tiapp)
             if (m != None):
                 version = int(m.group(2)) + 1
-                print 'updating tiapp CFBundleVersion to ' + version
+                print 'updating tiapp CFBundleVersion to ' + str(version)
                 tiapp = re.sub('<key>CFBundleVersion</key>\s*<string>[\d]*</string>', '<key>CFBundleVersion</key><string>' + str(version) + '</string>',tiapp)
                 f2 = open(tiappPath, "w")
                 f2.write(tiapp)
@@ -103,7 +103,7 @@ class MakeTiCommand(sublime_plugin.WindowCommand):
             m = re.search('(?<=android:versionCode=")([\d]*)(?=")',tiapp)
             if (m != None):
                 version = int(m.group(1)) + 1
-                print 'updating tiapp android:versionCode to ' + version
+                print 'updating tiapp android:versionCode to ' + str(version)
                 tiapp = re.sub('(?<=android:versionCode=")[\d]*(?=")', str(version),tiapp)
                 f2 = open(tiappPath, "w")
                 f2.write(tiapp)
