@@ -1,3 +1,0 @@
-[
-	{ "keys": ["super+b"], "command": "make_ti", "path":$ProjectDir }
-]

@@ -1,0 +1,7 @@
+[
+    {
+        "caption": "MakeTi: Build with Titanium",
+        "command": "make_ti",
+        "args": {}
+    }
+]
