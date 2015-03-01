@@ -1,0 +1,70 @@
+{
+	"scope": "source.js",
+	"completions": [
+	// misc completions
+		{
+			"trigger": "var",
+			"contents": "var $1 = $2"
+		}, {
+			"trigger": "true",
+			"contents": "true"
+		}, {
+			"trigger": "false",
+			"contents": "false"
+		}, {
+			"trigger": "addEventListener\tfn. (js)",
+			"contents": "addEventListener('${1:name}',${2:callback})"
+		}, {
+			"trigger": "removeEventListener\tfn. (js)",
+			"contents": "removeEventListener('${1:name}',${2:callback})"
+		}, {
+			"trigger": "applyProperties()\tfn. (js)",
+			"contents": "applyProperties(${0:props})"
+		}, {
+			"trigger": "fireEvent()\tfn. (js)",
+			"contents": "fireEvent(${0:name},${1:event})"
+		}, {
+			"trigger": "bubbleParent\tprop. (js)",
+			"contents": "bubbleParent"
+		}, {
+			"trigger": "bubbleParent = \tfn. (js)",
+			"contents": "bubbleParent = ${0:bubble}"
+		}, {
+			"trigger": "scrollToBottom()\tfn. (js)",
+			"contents": "scrollToBottom()"
+		}, {
+			"trigger": "scrollToTop()\tfn. (js)",
+			"contents": "scrollToTop()"
+		}, {
+			"trigger": "add()\tfn. (js)",
+			"contents": "add(${1})"
+		}, {
+			"trigger": "remove()\tfn. (js)",
+			"contents": "remove(${1})"
+		}, {
+			"trigger": "createView()\tfn. (js)",
+			"contents": "Ti.UI.createView({${1}})"
+		}, {
+			"trigger": "View()\tfn. (js)",
+			"contents": "new View({${1}})"
+		}, {
+			"trigger": "createLabel()\tfn. (js)",
+			"contents": "Ti.UI.createLabel({${1}})"
+		}, {
+			"trigger": "Label()\tfn. (js)",
+			"contents": "new Label({${1}})"
+		}, {
+			"trigger": "createWindow()\tfn. (js)",
+			"contents": "Ti.UI.createWindow({${1}})"
+		}, {
+			"trigger": "Window()\tfn. (js)",
+			"contents": "new Window({${1}})"
+		}, {
+			"trigger": "createNavigationWindow()\tfn. (js)",
+			"contents": "Ti.UI.createNavigationWindow({${1}})"
+		}, {
+			"trigger": "NavigationWindow()\tfn. (js)",
+			"contents": "new NavigationWindow({${1}})"
+		}
+	]
+}

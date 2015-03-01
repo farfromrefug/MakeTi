@@ -1,0 +1,6 @@
+[
+    { "keys": ["super+shift+r"], "command": "build", "args": {"variant": "History"}},
+    { "keys": ["super+shift+c"], "command": "build", "args": {"variant": "Clean"}},
+    { "keys": ["super+r"], "command": "build", "args": {"variant": "Last Command"}}
+
+]

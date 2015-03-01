@@ -1,7 +1,8 @@
 [
-    {
-        "caption": "MakeTi: Build with Titanium",
-        "command": "make_ti",
-        "args": {}
-    }
+   // HTML Compact Format
+   {
+      "caption": "Format: Compact",
+      "command": "reg_replace",
+      "args": {"replacements": ["trimwhitespaceandnewlines"]}
+   }
 ]

@@ -1,0 +1,15 @@
+{
+	// Path to node js
+	"nodejs": "/usr/local/bin/node",
+	// Path to the Titanium CLI
+	"titaniumCLI": "/usr/local/bin/titanium",
+	// Logging Level [trace, debug, info, warn, error]
+	"loggingLevel": "info",
+	// Path to the android sdk
+	"androidSDK": "/opt/android-sdk",
+	// Extra Settings for the iOS Simulator
+	// If you dont want to set them, make the values empty
+	"iosVersion": "", //eg. 6.1
+	"outputDir":"", //specify an output dir for dist builds
+	"iosCertsDir":"unknown" // specify a folder to look for certs instead of the keychain
+}

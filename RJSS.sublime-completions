@@ -1,0 +1,309 @@
+{
+	"scope": "source.rjss, source.js - bracket.angle",
+	"completions": [
+	{
+		"trigger": "true",
+		"contents": "true"
+	}, {
+		"trigger": "false",
+		"contents": "false"
+	}, {
+		"trigger": "FILL",
+		"contents": "'FILL'"
+	}, {
+		"trigger": "SIZE",
+		"contents": "'SIZE'"
+	}, {
+		"trigger": "NONE",
+		"contents": "Ti.UI.ListViewSeparatorStyle.NONE"
+	}, {
+		"trigger": "SINGLE_LINE",
+		"contents": "Ti.UI.ListViewSeparatorStyle.SINGLE_LINE"
+	}, {
+		"trigger": "SCALE_TYPE_ASPECT_FILL",
+		"contents": "Ti.UI.SCALE_TYPE_ASPECT_FILL"
+	}, {
+		"trigger": "SCALE_TYPE_ASPECT_FIT",
+		"contents": "Ti.UI.SCALE_TYPE_ASPECT_FIT"
+	}, {
+		"trigger": "TEXT_ELLIPSIZE_TAIL",
+		"contents": "Ti.UI.TEXT_ELLIPSIZE_TAIL"
+	}, {
+		"trigger": "TEXT_ELLIPSIZE_HEAD",
+		"contents": "Ti.UI.TEXT_ELLIPSIZE_HEAD"
+	}, {
+		"trigger": "TEXT_ELLIPSIZE_MIDDLE",
+		"contents": "Ti.UI.TEXT_ELLIPSIZE_MIDDLE"
+	}, {
+		"trigger": "PORTRAIT",
+		"contents": "Ti.UI.PORTRAIT"
+	}, {
+		"trigger": "UPSIDE_PORTRAIT",
+		"contents": "Ti.UI.UPSIDE_PORTRAIT"
+	}, {
+		"trigger": "LANDSCAPE_LEFT",
+		"contents": "Ti.UI.LANDSCAPE_LEFT"
+	}, {
+		"trigger": "LANDSCAPE_RIGHT",
+		"contents": "Ti.UI.LANDSCAPE_RIGHT"
+	}, {
+		"trigger": "BIG",
+		"contents": "Ti.UI.ActivityIndicatorStyle.BIG"
+	}, {
+		"trigger": "KEYBOARD_NUMBER_PAD",
+		"contents": "Ti.UI.KEYBOARD_NUMBER_PAD"
+	}, {
+		"trigger": "width\tprop. (rjss)",
+		"contents": "width:${0:0}"
+	}, {
+		"trigger": "height\tprop. (rjss)",
+		"contents": "height:${0:0}"
+	}, {
+		"trigger": "left\tprop. (rjss)",
+		"contents": "left:${0:0}"
+	}, {
+		"trigger": "right\tprop. (rjss)",
+		"contents": "right:${0}"
+	}, {
+		"trigger": "top\tprop. (rjss)",
+		"contents": "top:${0:0}"
+	}, {
+		"trigger": "bottom\tprop. (rjss)",
+		"contents": "bottom:${0:0}"
+	}, {
+		"trigger": "opacity\tprop. (rjss)",
+		"contents": "opacity:${0:0}"
+	}, {
+		"trigger": "borderRadius\tprop. (rjss)",
+		"contents": "borderRadius:${0:0}"
+	}, {
+		"trigger": "borderWidth\tprop. (rjss)",
+		"contents": "borderWidth:${0:1}"
+	}, {
+		"trigger": "maxLines\tprop. (rjss)",
+		"contents": "maxLines:${0:1}"
+	}, {
+		"trigger": "cacheSize\tprop. (rjss)",
+		"contents": "cacheSize:${0:3}"
+	}, {
+		"trigger": "maxLength\tprop. (rjss)",
+		"contents": "maxLength:${0:1}"
+	}, {
+		"trigger": "touchEnabled\tprop. (rjss)",
+		"contents": "touchEnabled:${0:false}"
+	}, {
+		"trigger": "visible\tprop. (rjss)",
+		"contents": "visible:${0:false}"
+	}, {
+		"trigger": "exitOnClose\tprop. (rjss)",
+		"contents": "exitOnClose:${0:true}"
+	}, {
+		"trigger": "enabled\tprop. (rjss)",
+		"contents": "enabled:${0:false}"
+	}, {
+		"trigger": "editable\tprop. (rjss)",
+		"contents": "editable:${0:false}"
+	}, {
+		"trigger": "persistent\tprop. (rjss)",
+		"contents": "persistent:${0:true}"
+	}, {
+		"trigger": "showPagingControl\tprop. (rjss)",
+		"contents": "showPagingControl:${0:false}"
+	}, {
+		"trigger": "scalesPageToFit\tprop. (rjss)",
+		"contents": "scalesPageToFit:${0:true}"
+	}, {
+		"trigger": "enableZoomControls\tprop. (rjss)",
+		"contents": "enableZoomControls:${0:false}"
+	}, {
+		"trigger": "disableBounce\tprop. (rjss)",
+		"contents": "disableBounce:${0:true}"
+	}, {
+		"trigger": "allowsSelection\tprop. (rjss)",
+		"contents": "allowsSelection:${0:false}"
+	}, {
+		"trigger": "delaysContentTouches\tprop. (rjss)",
+		"contents": "delaysContentTouches:${0:false}"
+	}, {
+		"trigger": "localLoadSync\tprop. (rjss)",
+		"contents": "localLoadSync:${0:true}"
+	}, {
+		"trigger": "backgroundGradient\tprop. (rjss)",
+		"contents": "backgroundGradient:{\n\ttype : '${1:linear}',\n\tcolors : ['${2:white}'],\n\tstartPoint : {\n\t\tx : ${3:0},\n\t\ty : ${4:0},\n\t},\n\tendPoint : {\n\t\tx : ${5:0},\n\t\ty : ${6:\"100%\"},\n\t}\n}"
+	}, {
+		"trigger": "backgroundSelectedGradient\tprop. (rjss)",
+		"contents": "backgroundSelectedGradient:{\n\ttype : '${1:linear}',\n\tcolors : ['${2:white}'],\n\tstartPoint : {\n\t\tx : ${3:0},\n\t\ty : ${4:0},\n\t},\n\tendPoint : {\n\t\tx : ${5:0},\n\t\ty : ${6:\"100%\"},\n\t}\n}"
+	}, {
+		"trigger": "backgroundDisabledGradient\tprop. (rjss)",
+		"contents": "backgroundDisabledGradient:{\n\ttype : '${1:linear}',\n\tcolors : ['${2:white}'],\n\tstartPoint : {\n\t\tx : ${3:0},\n\t\ty : ${4:0},\n\t},\n\tendPoint : {\n\t\tx : ${5:0},\n\t\ty : ${6:\"100%\"},\n\t}\n}"
+	}, {
+		"trigger": "selectedBackgroundGradient\tprop. (rjss)",
+		"contents": "backgroundDisabledGradient:{\n\ttype : '${1:linear}',\n\tcolors : ['${2:white}'],\n\tstartPoint : {\n\t\tx : ${3:0},\n\t\ty : ${4:0},\n\t},\n\tendPoint : {\n\t\tx : ${5:0},\n\t\ty : ${6:\"100%\"},\n\t}\n}"
+	}, {
+		"trigger": "lineGradient\tprop. (rjss)",
+		"contents": "lineGradient:{\n\ttype : '${1:linear}',\n\tcolors : ['${2:white}'],\n\tstartPoint : {\n\t\tx : ${3:0},\n\t\ty : ${4:0},\n\t},\n\tendPoint : {\n\t\tx : ${5:0},\n\t\ty : ${6:\"100%\"},\n\t}\n}"
+	}, {
+		"trigger": "fillGradient\tprop. (rjss)",
+		"contents": "fillGradient:{\n\ttype : '${1:linear}',\n\tcolors : ['${2:white}'],\n\tstartPoint : {\n\t\tx : ${3:0},\n\t\ty : ${4:0},\n\t},\n\tendPoint : {\n\t\tx : ${5:0},\n\t\ty : ${6:\"100%\"},\n\t}\n}"
+	}, {
+		"trigger": "value\tprop. (rjss)",
+		"contents": "value:${1}"
+	}, {
+		"trigger": "font\tprop. (rjss)",
+		"contents": "font:{${1}}"
+	}, {
+		"trigger": "size\tprop. (rjss)",
+		"contents": "size:${1:14}"
+	}, {
+		"trigger": "family\tprop. (rjss)",
+		"contents": "family:'${1}'"
+	}, {
+		"trigger": "weight\tprop. (rjss)",
+		"contents": "weight:'${1:bold}'"
+	}, {
+		"trigger": "padding\tprop. (rjss)",
+		"contents": "padding:{${1}}"
+	}, {
+		"trigger": "borderPadding\tprop. (rjss)",
+		"contents": "borderPadding:{${1}}"
+	}, {
+		"trigger": "imageCap\tprop. (rjss)",
+		"contents": "imageCap:{${1}}"
+	}, {
+		"trigger": "color\tprop. (rjss)",
+		"contents": "color:'#${1}'"
+	}, {
+		"trigger": "backgroundColor\tprop. (rjss)",
+		"contents": "backgroundColor:'#${1}'"
+	}, {
+		"trigger": "backgroundDisabledColor\tprop. (rjss)",
+		"contents": "backgroundDisabledColor:'#${1}'"
+	}, {
+		"trigger": "backgroundSelectedColor\tprop. (rjss)",
+		"contents": "backgroundSelectedColor:'#${1}'"
+	}, {
+		"trigger": "selectedBackgroundColor\tprop. (rjss)",
+		"contents": "selectedBackgroundColor:'#${1}'"
+	}, {
+		"trigger": "borderColor\tprop. (rjss)",
+		"contents": "borderColor:'#${1}'"
+	}, {
+		"trigger": "borderSelectedColor\tprop. (rjss)",
+		"contents": "borderSelectedColor:'#${1}'"
+	}, {
+		"trigger": "borderDisabledColor\tprop. (rjss)",
+		"contents": "borderDisabledColor:'#${1}'"
+	}, {
+		"trigger": "selectedColor\tprop. (rjss)",
+		"contents": "selectedColor:'#${1}'"
+	}, {
+		"trigger": "disabledColor\tprop. (rjss)",
+		"contents": "disabledColor:'#${1}'"
+	}, {
+		"trigger": "image\tprop. (rjss)",
+		"contents": "image:'${1}'"
+	}, {
+		"trigger": "backgroundImage\tprop. (rjss)",
+		"contents": "backgroundImage:'${1}'"
+	}, {
+		"trigger": "backgroundSelectedImage\tprop. (rjss)",
+		"contents": "backgroundSelectedImage:'${1}'"
+	}, {
+		"trigger": "backgroundDisabledImage\tprop. (rjss)",
+		"contents": "backgroundDisabledImage:'${1}'"
+	}, {
+		"trigger": "selectedBackgroundImage\tprop. (rjss)",
+		"contents": "selectedBackgroundImage:'${1}'"
+	}, {
+		"trigger": "viewMask\tprop. (rjss)",
+		"contents": "viewMask:'${1}'"
+	}, {
+		"trigger": "text\tprop. (rjss)",
+		"contents": "text:'${1}'"
+	}, {
+		"trigger": "html\tprop. (rjss)",
+		"contents": "html:'${1}'"
+	}, {
+		"trigger": "message\tprop. (rjss)",
+		"contents": "message:'${1}'"
+	}, {
+		"trigger": "title\tprop. (rjss)",
+		"contents": "title:'${1}'"
+	}, {
+		"trigger": "rclass\tprop. (rjss)",
+		"contents": "rclass:'${1}'"
+	}, {
+		"trigger": "rid\tprop. (rjss)",
+		"contents": "rid:'${1}'"
+	}, {
+		"trigger": "headerTitle\tprop. (rjss)",
+		"contents": "headerTitle:'${1}'"
+	}, {
+		"trigger": "footerTitle\tprop. (rjss)",
+		"contents": "footerTitle:'${1}'"
+	}, {
+		"trigger": "defaultItemTemplate\tprop. (rjss)",
+		"contents": "defaultItemTemplate:'${1}'"
+	}, {
+		"trigger": "type\tprop. (rjss)",
+		"contents": "type:'Ti.UI.${1}'"
+	}, {
+		"trigger": "separatorStyle\tprop. (rjss)",
+		"contents": "separatorStyle:${1:Ti.UI.ListViewSeparatorStyle.NONE}"
+	}, {
+		"trigger": "ellipsize\tprop. (rjss)",
+		"contents": "ellipsize:${1:Ti.UI.TEXT_ELLIPSIZE_TAIL}"
+	}, {
+		"trigger": "multiLineEllipsize\tprop. (rjss)",
+		"contents": "multiLineEllipsize:${1:Ti.UI.TEXT_ELLIPSIZE_TAIL}"
+	}, {
+		"trigger": "scaleType\tprop. (rjss)",
+		"contents": "scaleType:${1:Ti.UI.SCALE_TYPE_ASPECT_FIT}"
+	}, {
+		"trigger": "textAlign\tprop. (rjss)",
+		"contents": "textAlign:'${1:center}'"
+	}, {
+		"trigger": "verticalAlign\tprop. (rjss)",
+		"contents": "verticalAlign:'${1:middle}'"
+	}, {
+		"trigger": "layout\tprop. (rjss)",
+		"contents": "layout:'${1:horizontal}'"
+	}, {
+		"trigger": "horizontalWrap\tprop. (rjss)",
+		"contents": "horizontalWrap:${1:true}"
+	}, {
+		"trigger": "navBarHidden\tprop. (rjss)",
+		"contents": "navBarHidden:${1:true}"
+	}, {
+		"trigger": "orientationModes\tprop. (rjss)",
+		"contents": "orientationModes:[${1:Ti.UI.PORTRAIT}]"
+	}, {
+		"trigger": "style\tprop. (rjss)",
+		"contents": "style:${1}"
+	}, {
+		"trigger": "keyboardType\tprop. (rjss)",
+		"contents": "keyboardType:[${1:Ti.UI.KEYBOARD_NUMBER_PAD}]"
+	}, {
+		"trigger": "items\tprop. (rjss)",
+		"contents": "items:[${1}]"
+	}, {
+		"trigger": "sections\tprop. (rjss)",
+		"contents": "sections:[${1}]"
+	}, {
+		"trigger": "sections\tprop. (rjss)",
+		"contents": "sections:[${1}]"
+	}, {
+		"trigger": "childTemplates\tprop. (rjss)",
+		"contents": "childTemplates:[${1}]"
+	}, {
+		"trigger": "properties\tprop. (rjss)",
+		"contents": "properties:{${1}}"
+	}, {
+		"trigger": "templates\tprop. (rjss)",
+		"contents": "templates:{${1}}"
+	}, {
+		"trigger": "transparent\tstring. (rjss)",
+		"contents": "'transparent'"
+	}
+  ]
+}

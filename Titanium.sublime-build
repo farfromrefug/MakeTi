@@ -1,0 +1,25 @@
+{
+    "selector": "source.javascript",
+    "working_dir": "${project_path:${folder}}",
+    "target":"titanium",
+    "file_regex": "Script\\sError\\sat\\s+(?:file:\/\/)?([^:]+):(\\d+)(?:\")?(.*?)\"?$",
+    "variants": [
+        { 
+            "target":"titanium",
+            "name": "Titanium Last Command",
+            "command":"titaniumMostRecent"
+        },
+
+        { 
+            "target":"titanium",
+            "name": "Titanium History",
+            "command":"titaniumMostRecents"
+        },
+
+        { 
+            "target":"titanium",
+            "name": "Titanium Clean",
+            "command":"clean"
+        }
+    ]
+}
