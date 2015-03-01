@@ -1,7 +1,0 @@
-[
-	{ "keys": ["super+b"], "command": "make_ti", "path":$ProjectDir }
-	{ "keys": ["super+r"], "command": "make_ti", "path":$ProjectDir, "args": {
-			"runLastCommand": true
-		}
-	}
-]
